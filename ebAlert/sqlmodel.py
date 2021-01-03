@@ -78,13 +78,22 @@ def addLink(link):
         db.add(newLink)
 
 
+#def getLinks():
+#    with getSession() as db:
+#        result = db.query(EbayLink).all()
+#        links = []
+#        for row in result:
+#            links.append(row.__dict__)
+#        return links
+
 def getLinks():
     with getSession() as db:
         result = db.query(EbayLink).all()
         links = []
         for row in result:
-            links.append(row.__dict__)
+            links.append((row.id, row.link))
         return links
+
 
 def removeLink(linkId):
     with getSession() as db:

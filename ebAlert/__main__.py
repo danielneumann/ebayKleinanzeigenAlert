@@ -25,11 +25,12 @@ def start():
     loop through the urls in the database and send message
     """
     if sql.getLinks():
-        links = [rows["link"] for rows in sql.getLinks()]
+        #links = [rows["link"] for rows in sql.getLinks()]
+        links = sql.getLinks()
         if links:
             for link in links:
                 sleep(randint(0, 10))
-                addPost(link, True)
+                addPost(link[1], True)
     print("Success")
 
 
@@ -46,7 +47,8 @@ def links(show, remove, clear, add, init):
     #TODO: Add verification if action worked.
     if show:
         if sql.getLinks():
-            links = [(rows["id"], rows["link"])for rows in sql.getLinks()]
+#            links = [(rows["id"], rows["link"]) for rows in sql.getLinks()]
+            links = sql.getLinks()
             print("id     link")
             if links:
                 for id, link in links:
@@ -63,10 +65,11 @@ def links(show, remove, clear, add, init):
         print("Link and post added to the database")
     elif init:
         if sql.getLinks():
-            links = [rows["link"] for rows in sql.getLinks()]
+            links = sql.getLinks()
+                                   
             if links:
                 for link in links:
-                    addPost(link)
+                    addPost(link[1])
             print("database initialised")
 
 
@@ -82,8 +85,7 @@ def addPost(link, toSend=False):
         if not sql.postExist(post.id):
             sql.addPost([post])
             if toSend:
-                telegram.sendMessage("{}\n\n{} ({})\n\n{}".format(post.title, post.price, post.city, post.link))
-
+                telegram.sendMessage("{}\n\n{} ({})\n\n{}".format(post.price, post.city, post.title, post.link))
 
 if __name__ == "__main__":
     cli(sys.argv[1:])

@@ -1,4 +1,8 @@
 import requests
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 from . import createLogger
 
 log = createLogger(__name__)
@@ -37,7 +41,7 @@ def getPost(link):
     response = session.get('{}'.format(link),
                            headers=customHeader)
     if response.status_code == 200:
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = BeautifulSoup(response.text.decode('utf-8'), "html.parser")
         result = soup.find(attrs={"id": "srchrslt-adtable"})
         if result:
             articles = result.find_all(attrs={"class": "ad-listitem lazyload-item"})

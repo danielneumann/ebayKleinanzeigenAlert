@@ -1,3 +1,4 @@
-ebAlert/credential.py
+propAlert/credential.py
 .idea
-ebayAlert*
+PropertyAlert*
+*.pyc

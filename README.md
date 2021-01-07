@@ -1,7 +1,15 @@
-# ebayKleinanzeigenAlert - (ebAlert)
-Small CLI program that will send you an a Telegram message for every new posts on the specific links of the Ebay Kleinanzeigen website. 
+## Motivation - Stop spending hours on real estate platforms!
+@todo describe
 
+# PropertyAlert - (propAlert)
+Small python module that provides basic functionality to register observation links and inform on new entries.
 No API required - Only URL of the query.
+
+Right now, it supports:
+
+* ebay Kleinanzeigen: https://www.ebay-kleinanzeigen.de/
+* Immo Scout24: https://www.immobilienscout24.de/
+* immonet: https://www.immonet.de/
 
 ## Install
 * Download folder or clone
@@ -9,14 +17,14 @@ No API required - Only URL of the query.
 * Hard code your telegram API key and messageID in the telegramclass.py file.
 * Install or run straight from directory.
   * install with ````pip install .  ````
-  * run with ````python -m ebAlert ````
+  * run with ````python -m propAlert ````
 
 ## Usage & Example
-* ```ebAlert links [opts] ``` to show, add, remove links
-* ```ebAlert start``` to start receiving notification
+* ```propAlert links [opts] ``` to show, add, remove links
+* ```propAlert start``` to start receiving notification
 
 
-* ```ebAlert links add "https://www.ebay...k0l9354r20"``` Assuming you just look through the web page while copy no notification will be send. 
+* ```postAlert links add "https://www.ebay...k0l9354r20"``` Assuming you just look through the web page while copy no notification will be send. 
 * Typically run as a cron job on an hourly basis.
 
 ## Requirements
@@ -24,6 +32,32 @@ No API required - Only URL of the query.
 * Python 3
 * click, requests, bs4 and sqlalchemy (arguably sqlalchemy is a little overkill for that purpose)
 
-## Future Plans
+## Create a bot
 
-* add functionality to add link through telegram.
+Use BotFather and follow this tutorial: https://core.telegram.org/bots#creating-a-new-bot
+
+## Obtain chat ID
+
+# 1- Add the bot to the group.
+Go to the group, click on group name, click on Add members, in the searchbox search for your bot like this: @my_bot, select your bot and click add.
+
+# 2- Send a dummy message to the bot.
+You can use this example: /my_id @my_bot
+(I tried a few messages, not all the messages work. The example above works fine. Maybe the message should start with /)
+
+# 3- Go to following url: https://api.telegram.org/botXXX:YYYY/getUpdates
+replace XXX:YYYY with your bot token
+
+# 4- Look for "chat":
+{"id":-zzzzzzzzzz, -zzzzzzzzzz is your chat id (with the negative sign).
+
+# 5- Testing: You can test sending a message to the group with a curl:
+
+curl -X POST "https://api.telegram.org/botXXX:YYYY/sendMessage" -d "chat_id=-zzzzzzzzzz&text=my sample text"
+
+## Executing it regularly
+
+## Credits
+Thanks to
+* @vinc3PO for providing the initial code
+* @melloskitten for providing codebase for 

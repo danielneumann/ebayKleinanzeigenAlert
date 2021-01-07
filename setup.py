@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ebayAlert',
+    name='PropertyAlert',
     version='0.3',
     packages=find_packages(),
     install_requires=[
@@ -10,5 +10,5 @@ setup(
         'bs4>=0.0.1',
         'sqlalchemy>=1.3'
     ],
-    entry_points={'console_scripts':'ebAlert=ebAlert.__main__:cli'}
+    entry_points={'console_scripts':'propAlert=propAlert.__main__:cli'}
 )
